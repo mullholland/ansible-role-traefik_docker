@@ -1,0 +1,16 @@
+---
+- name: user | Ensure group exists
+  ansible.builtin.group:
+    name: "{{ traefik_docker_group }}"
+    gid: "{{ traefik_docker_gid }}"
+    state: present
+
+- name: user | Ensure user exists with gid
+  ansible.builtin.user:
+    name: "{{ traefik_docker_user }}"
+    uid: "{{ traefik_docker_uid }}"
+    state: "present"
+
+- name: user | Ensure that docker network exists
+  community.docker.docker_network:
+    name: "{{ traefik_docker_network_name }}"

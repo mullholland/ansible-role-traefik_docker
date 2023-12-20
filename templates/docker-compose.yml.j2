@@ -1,0 +1,39 @@
+---
+version: "3.3"
+
+networks:
+  {{ app_network }}:
+    external: true
+
+services:
+  traefik:
+    image: "{{ app_image }}"
+    hostname: "{{ app_name }}"
+    init: true
+    restart: always
+    command:
+{% for app_command in app_commands %}
+      - {{ app_command }}
+{% endfor %}
+    volumes:
+{% for app_volume in app_volumes %}
+      - {{ app_volume }}
+{% endfor %}
+    environment:
+      PUID: {{ app_uid }}
+      PGID: {{ app_gid }}
+      TZ: {{ app_timezone }}
+{% for app_environment in app_environment_variables %}
+      {{ app_environment }}
+{% endfor %}
+    networks:
+      - {{ app_network }}
+    ports:
+{% for app_port in app_ports %}
+      - {{ app_port }}
+{% endfor %}
+{% if traefik_docker_labels and traefik_docker_labels|length %}
+    labels:
+{% for traefik_docker_label in traefik_docker_labels %}
+      - "{{ traefik_docker_label}}"
+{% endfor %}{% endif %}

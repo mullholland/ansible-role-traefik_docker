@@ -1,0 +1,8 @@
+---
+- name: create user
+  ansible.builtin.include_tasks:
+    file: user.yml
+
+- name: prepare traefik
+  ansible.builtin.include_tasks:
+    file: traefik.yml

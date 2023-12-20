@@ -1,0 +1,36 @@
+---
+galaxy_info:
+  author: mullholland
+  namespace: mullholland
+  role_name: traefik_docker
+  description: Installs and configures traefik container based on official traefik docker container
+  license: MIT
+  company: none
+  min_ansible_version: "2.10"
+
+  platforms:
+    - name: EL
+      versions:
+        - all
+    # - name: Amazon
+    #   versions:
+    #     - Candidate
+    - name: Fedora
+      versions:
+        - "38"
+        - "39"
+    - name: Ubuntu
+      versions:
+        - "all"
+    - name: Debian
+      versions:
+        - all
+
+  galaxy_tags:
+    - cloud
+    - development
+    - webserver
+    - traefik
+    - proxy
+
+dependencies: []
