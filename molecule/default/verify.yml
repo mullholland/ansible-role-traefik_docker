@@ -7,7 +7,7 @@
     verify:
       package: "example"
       config_file: "/opt/traefik/config/config.yml"
-      config_line: '    -   certFile: /tools/certs/fullchain.pem'
+      config_line: '      minVersion: "VersionTLS13'
       config_owner: "homelab"
       config_group: "homelab"
       config_mode: "0640"
