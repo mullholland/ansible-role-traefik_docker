@@ -6,7 +6,7 @@
   vars:
     verify:
       package: "example"
-      config_file: "/opt/traefik/ssl/config.yml"
+      config_file: "/opt/traefik/config/config.yml"
       config_line: '    -   certFile: /tools/certs/fullchain.pem'
       config_owner: "homelab"
       config_group: "homelab"
