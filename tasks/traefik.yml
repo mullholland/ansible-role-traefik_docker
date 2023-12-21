@@ -24,16 +24,18 @@
     mode: "0770"
     state: directory
   with_items:
+    - "config"
     - "ssl"
 
 - name: "traefik | Ensure config config.yml exists"
   ansible.builtin.template:
     src: "config.yml.j2"
-    dest: "{{ app_base_path }}/{{ app_name }}/ssl/config.yml"
+    dest: "{{ app_base_path }}/{{ app_name }}/config/config.yml"
     mode: "0640"
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
   notify: traefik_restart
+  when: traefik_docker_config and traefik_docker_config|length
 
 - name: traefik | get docker executable path
   ansible.builtin.command:

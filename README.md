@@ -15,6 +15,13 @@ This example is taken from [`molecule/default/converge.yml`](https://github.com/
   hosts: all
   become: true
   gather_facts: true
+  vars:
+    traefik_docker_config:
+      tls:
+        options:
+          modern:
+            minVersion: "VersionTLS13"
+            sniStrict: true
 
   roles:
     - role: "mullholland.traefik_docker"
@@ -91,13 +98,15 @@ traefik_docker_commands:
   - "--certificatesresolvers.letsEncrypt.acme.email={{ traefik_docker_ssl_email }}"
   - "--certificatesresolvers.letsEncrypt.acme.storage=/letsencrypt/acme.json"
 
-# Configure ssl
+# Configure dynamic config
 # will be put through `to_nice_yaml`
-traefik_docker_ssl_config:
-  tls:
-    certificates:
-      - certFile: /tools/certs/fullchain.pem
-        keyFile: /tools/certs/privkey.pem
+traefik_docker_config: []
+# See https://doc.traefik.io/traefik/https/tls/
+# tls:
+#   options:
+#     modern:
+#       minVersion: "VersionTLS13"
+#       sniStrict: true
 
 # Email for which to register the letsencrypt emails
 traefik_docker_ssl_email: "ssl@example.com"
@@ -108,6 +117,8 @@ traefik_docker_environment_variables: []
 traefik_docker_volumes:
   - "/tmp:/tmp"
   - "/var/run/docker.sock:/var/run/docker.sock:ro"
+  # dynamic config
+  - "/opt/traefik/config/config.yml:/etc/traefik/config.yml"
   - "/opt/traefik/ssl/:/letsencrypt"
 # which port to expose. can be empty if used with traefik for example
 traefik_docker_ports:
