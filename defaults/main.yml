@@ -67,6 +67,7 @@ traefik_docker_volumes:
   # dynamic config
   - "/opt/traefik/config/config.yml:/etc/traefik/config.yml"
   - "/opt/traefik/ssl/:/letsencrypt"
+
 # which port to expose. can be empty if used with traefik for example
 traefik_docker_ports:
   - "80:80"
