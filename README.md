@@ -76,6 +76,7 @@ traefik_docker_user: "homelab"
 traefik_docker_uid: "900"
 traefik_docker_group: "homelab"
 traefik_docker_gid: "900"
+traefik_docker_user_system: true
 
 # which container version to install
 # https://hub.docker.com/_/traefik/tags
