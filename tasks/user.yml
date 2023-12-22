@@ -9,5 +9,5 @@
   ansible.builtin.user:
     name: "{{ traefik_docker_user }}"
     uid: "{{ traefik_docker_uid }}"
-    system: "{{ traefik_docker_users_system | default(omit) }}"
+    system: "{{ traefik_docker_user_system | default(omit) }}"
     state: "present"
