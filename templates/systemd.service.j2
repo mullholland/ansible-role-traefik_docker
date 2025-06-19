@@ -9,7 +9,7 @@ TimeoutStartSec=15min
 Restart=always
 
 RemainAfterExit=true
-WorkingDirectory=/opt/{{ app_name }}
+WorkingDirectory={{ traefik_docker_base_path }}/{{ app_name }}
 
 # Start
 ExecStartPre={{ traefik_docker_executable_path.stdout }} compose pull --quiet --ignore-pull-failures
