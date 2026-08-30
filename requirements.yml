@@ -3,4 +3,8 @@ roles:
   # Install a role from Ansible Galaxy.
   - name: mullholland.repository_epel
   - name: mullholland.docker
-  - name: mullholland.pip
+
+collections:
+  # https://docs.ansible.com/ansible/latest/collections/community/docker/docker_network_module.html
+  - name: community.docker
+    source: https://galaxy.ansible.com
