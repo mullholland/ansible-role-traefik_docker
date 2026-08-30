@@ -5,4 +5,4 @@
 repository:
   description: Installs and configures traefik container based on official traefik docker container
   homepage: https://mullholland.net
-  topics: cloud, development, webserver, traefik, proxy, ansible, molecule, tox, playbook
+  topics: cloud, development, webserver, traefik, proxy, ansible, molecule, playbook

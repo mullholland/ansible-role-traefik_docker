@@ -1,7 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  become: true
   gather_facts: true
   vars:
     traefik_docker_config:
@@ -12,4 +11,4 @@
             sniStrict: true
 
   roles:
-    - role: "ansible-role-traefik_docker"
+    - role: "{{ lookup('env', 'MOLECULE_PROJECT_DIRECTORY') }}"
