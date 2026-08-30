@@ -1,5 +1,5 @@
 ---
-- name: traefik | set application facts
+- name: traefik | Set application facts
   ansible.builtin.set_fact:
     app_name: "traefik"
     app_image: "{{ traefik_docker_version }}"
@@ -34,23 +34,23 @@
     mode: "0640"
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
-  notify: traefik_restart
-  when: traefik_docker_config and traefik_docker_config|length
+  notify: Traefik restart
+  when: (traefik_docker_config | default([]) | length) > 0
 
-- name: traefik | get docker executable path
+- name: traefik | Get docker executable path
   ansible.builtin.command:
     cmd: "which docker"
   changed_when: false
   register: traefik_docker_executable_path
 
-- name: "traefik | create docker-compose.yml"
+- name: "traefik | Create docker-compose.yml"
   ansible.builtin.template:
     src: "docker-compose.yml.j2"
     dest: "{{ app_base_path }}/{{ app_name }}/docker-compose.yml"
     mode: "0640"
     owner: "{{ app_user }}"
     group: "{{ app_group }}"
-  notify: traefik_restart
+  notify: Traefik restart
 
 - name: "traefik | Create systemd service"
   ansible.builtin.template:
@@ -60,5 +60,5 @@
     owner: "root"
     group: "root"
   notify:
-    - traefik_systemd_reload
-    - traefik_restart
+    - Traefik systemd reload
+    - Traefik restart

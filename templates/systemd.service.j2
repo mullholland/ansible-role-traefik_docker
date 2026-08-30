@@ -4,10 +4,8 @@ Requires=docker.service network-online.target
 After=docker.service network-online.target
 
 [Service]
-Type=simple
+Type=oneshot
 TimeoutStartSec=15min
-Restart=always
-
 RemainAfterExit=true
 WorkingDirectory={{ traefik_docker_base_path }}/{{ app_name }}
 
