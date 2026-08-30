@@ -4,6 +4,29 @@
   gather_facts: true
 
   pre_tasks:
+    # The nested Docker daemon we install below runs inside a container
+    # whose own root filesystem is already overlayfs (molecule's docker
+    # driver). Recent containerd (2.x, shipped for EL9+/Fedora/newer
+    # Ubuntu-Debian) fails to mount overlay-on-overlay in that setup
+    # ("failed to mount ... invalid argument"), which only ever shows up
+    # in this nested test environment - not on a real (non-containerized)
+    # host running traefik_docker. Forcing vfs here avoids that, at the
+    # cost of slower image layer handling during tests only.
+    - name: Ensure /etc/docker exists
+      ansible.builtin.file:
+        path: /etc/docker
+        state: directory
+        mode: "0755"
+
+    - name: Force vfs storage driver for the nested test Docker daemon
+      ansible.builtin.copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "storage-driver": "vfs"
+          }
+        mode: "0644"
+
     - name: Install python3-docker via apt (Debian)
       ansible.builtin.apt:
         name:
