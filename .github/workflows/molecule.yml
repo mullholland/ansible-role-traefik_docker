@@ -47,8 +47,6 @@ jobs:
             tag: "43"
           - image: "fedora"
             tag: "44"
-          - image: "fedora"
-            tag: "45"
           - image: "ubuntu"
             tag: "resolute"
           - image: "ubuntu"
