@@ -125,6 +125,14 @@ traefik_docker_ports:
   - "443:443"
 traefik_docker_labels:
   - "traefik.enable=false"
+
+# Logging configuration of the container(s). Limits the json-file log size by default.
+# Set to {} to fall back to the docker daemon defaults.
+traefik_docker_logging:
+  driver: "json-file"
+  options:
+    max-size: "10m"
+    max-file: "3"
 ```
 
 ## [Requirements](#requirements)
