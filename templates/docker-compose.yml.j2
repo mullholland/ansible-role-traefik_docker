@@ -10,6 +10,10 @@ services:
     hostname: "{{ app_name }}"
     init: true
     restart: always
+{% if traefik_docker_logging %}
+    logging:
+      {{ traefik_docker_logging | to_nice_yaml(indent=2) | indent(6) | trim }}
+{% endif %}
     command:
 {% for app_command in app_commands %}
       - {{ app_command }}
